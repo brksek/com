@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lighting Supervisor & TD Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        /* Custom scrollbar for that premium dark mode feel */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0a0a0a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #333;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            height: 0;
+            overflow: hidden;
+            border-radius: 0.5rem;
+            background-color: #171717;
+            border: 1px solid #262626;
+        }
+        .video-container iframe, .video-container video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        
+        /* Cinematic Grain Overlay */
+        .film-grain {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.04;
+            background-image: url('data:image/svg+xml,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)"/%3E%3C/svg%3E');
+        }
+    </style>
+</head>
+<body class="bg-black text-neutral-300 font-sans antialiased selection:bg-white selection:text-black">
+
+    <div class="film-grain"></div>
+
+    <!-- Minimal Nav -->
+    <nav class="fixed w-full top-0 z-50 bg-gradient-to-b from-black via-black/90 to-transparent px-6 pt-6 pb-12 md:px-12">
+        <div class="flex justify-between items-center text-xs font-mono tracking-widest uppercase text-neutral-400">
+            <a href="#" class="hover:text-white transition-colors">BURAK SEKER</a>
+            <div class="flex space-x-6">
+                <a href="#reel" class="hover:text-white transition-colors">Reel</a>
+                <a href="#about" class="hover:text-white transition-colors">About</a>
+                <a href="#credits" class="hover:text-white transition-colors">Credits</a>
+                <a href="#contact" class="hover:text-white transition-colors">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero / Reel Section (No Fluff) -->
+    <section id="reel" class="min-h-screen flex flex-col justify-center px-6 md:px-12 pt-24 pb-12 relative z-10">
+        <div class="w-full flex justify-between items-end mb-6 uppercase tracking-widest text-xs font-mono text-neutral-500">
+            <span>// Lighting Supervisor</span>
+            <span>Technical Director //</span>
+        </div>
+
+        <!-- REEL CONTAINER -->
+        <div class="w-full shadow-2xl overflow-hidden relative group bg-neutral-900 border border-neutral-800">
+            <div class="video-container">
+                <iframe src="https://player.vimeo.com/video/1147817069?color=ffffff&title=0&byline=0&portrait=0" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- The Stack (Brutalist Spec Sheet) -->
+    <section class="px-6 md:px-12 py-12 relative z-10">
+        <div class="flex flex-col md:flex-row justify-between border-y border-neutral-800 py-12 text-xs font-mono tracking-widest text-neutral-500 uppercase gap-6 md:gap-0">
+             <div class="hover:text-white transition-colors duration-300">01 // Lighting / Lookdev</div>
+             <div class="hover:text-white transition-colors duration-300 md:text-center">02 // Houdini / Solaris</div>
+             <div class="hover:text-white transition-colors duration-300 md:text-center">03 // USD Pipeline</div>
+             <div class="hover:text-white transition-colors duration-300 md:text-right">04 // Python Tooling</div>
+        </div>
+        
+        <!-- Software Ecosystem -->
+        <div class="mt-8 flex flex-col md:flex-row justify-between gap-8 md:gap-0 text-xs font-mono tracking-widest uppercase text-neutral-600">
+            <div>
+                <span class="text-neutral-400 block mb-2">// CORE DCC</span>
+                Houdini <span class="text-neutral-800 px-2">|</span> Nuke <span class="text-neutral-800 px-2">|</span> Maya
+            </div>
+            <div class="md:text-center">
+                <span class="text-neutral-400 block mb-2">// ENGINES</span>
+                Arnold <span class="text-neutral-800 px-2">|</span> V-Ray <span class="text-neutral-800 px-2">|</span> Karma <span class="text-neutral-800 px-2">|</span> Mantra
+            </div>
+            <div class="md:text-right">
+                <span class="text-neutral-400 block mb-2">// ADAPTABILITY</span>
+                Engine Agnostic <span class="text-neutral-800 px-2">|</span> Fast Ramp-Up
+            </div>
+        </div>
+    </section>
+
+    <!-- Bio / The Operator -->
+    <section id="about" class="py-24 px-6 md:px-12 relative z-10">
+        <div class="max-w-5xl mx-auto text-center flex flex-col items-center">
+            <h2 class="uppercase tracking-widest text-xs font-mono text-neutral-500 mb-8">// INFO</h2>
+            <p class="text-2xl md:text-4xl font-semibold tracking-tight text-neutral-300 leading-snug">
+                Lighting Supervisor and Technical Director bridging the gap between lookdev and pipeline engineering.
+            </p>
+            <p class="text-lg md:text-xl text-neutral-500 mt-6 max-w-3xl mx-auto">
+                Dual focus on managing artistic direction for major sequences and building the technical architecture underneath them. Specializing in Houdini, complex USD workflows, and custom Python tooling. Writing the code to solve the bottleneck, then lighting the shot.
+            </p>
+        </div>
+    </section>
+
+    <!-- Credits List -->
+    <section id="credits" class="py-24 px-6 md:px-12 relative z-10">
+        <h2 class="uppercase tracking-widest text-xs font-mono text-neutral-500 mb-16">// Selected Works</h2>
+        
+        <div class="border-t border-neutral-800">
+
+            <!-- Credit: Avatar -->
+            <div class="group flex flex-col md:flex-row justify-between items-baseline py-8 border-b border-neutral-800 hover:bg-neutral-900/40 transition duration-300 px-4 -mx-4">
+                <h3 class="text-3xl md:text-5xl font-bold tracking-tighter text-neutral-400 group-hover:text-white transition duration-300">Avatar: The Last Airbender</h3>
+                <div class="flex gap-8 text-neutral-600 font-mono text-sm mt-4 md:mt-0 uppercase tracking-wider group-hover:text-neutral-400 transition duration-300">
+                    <span>Lighting Supervisor</span>
+                </div>
+            </div>
+            
+            <!-- Credit 1 -->
+            <div class="group flex flex-col md:flex-row justify-between items-baseline py-8 border-b border-neutral-800 hover:bg-neutral-900/40 transition duration-300 px-4 -mx-4">
+                <h3 class="text-3xl md:text-5xl font-bold tracking-tighter text-neutral-400 group-hover:text-white transition duration-300">Final Destination: Bloodlines</h3>
+                <div class="flex gap-8 text-neutral-600 font-mono text-sm mt-4 md:mt-0 uppercase tracking-wider group-hover:text-neutral-400 transition duration-300">
+                    <span>Lighting Supervisor</span>
+                </div>
+            </div>
+
+            <!-- Credit 2 -->
+            <div class="group flex flex-col md:flex-row justify-between items-baseline py-8 border-b border-neutral-800 hover:bg-neutral-900/40 transition duration-300 px-4 -mx-4">
+                <h3 class="text-3xl md:text-5xl font-bold tracking-tighter text-neutral-400 group-hover:text-white transition duration-300">The Boys</h3>
+                <div class="flex gap-8 text-neutral-600 font-mono text-sm mt-4 md:mt-0 uppercase tracking-wider group-hover:text-neutral-400 transition duration-300">
+                    <span>Lighting Supervisor</span>
+                </div>
+            </div>
+
+            <!-- Credit: Alien -->
+            <div class="group flex flex-col md:flex-row justify-between items-baseline py-8 border-b border-neutral-800 hover:bg-neutral-900/40 transition duration-300 px-4 -mx-4">
+                <h3 class="text-3xl md:text-5xl font-bold tracking-tighter text-neutral-400 group-hover:text-white transition duration-300">Alien: Earth</h3>
+                <div class="flex gap-8 text-neutral-600 font-mono text-sm mt-4 md:mt-0 uppercase tracking-wider group-hover:text-neutral-400 transition duration-300">
+                    <span>Lighting TD</span>
+                </div>
+            </div>
+
+            <!-- Credit: Mando -->
+            <div class="group flex flex-col md:flex-row justify-between items-baseline py-8 border-b border-neutral-800 hover:bg-neutral-900/40 transition duration-300 px-4 -mx-4">
+                <h3 class="text-3xl md:text-5xl font-bold tracking-tighter text-neutral-400 group-hover:text-white transition duration-300">The Mandalorian</h3>
+                <div class="flex gap-8 text-neutral-600 font-mono text-sm mt-4 md:mt-0 uppercase tracking-wider group-hover:text-neutral-400 transition duration-300">
+                    <span>Lighting Artist</span>
+                </div>
+            </div>
+
+            <!-- Credit 4 -->
+            <div class="group flex flex-col md:flex-row justify-between items-baseline py-8 border-b border-neutral-800 hover:bg-neutral-900/40 transition duration-300 px-4 -mx-4">
+                <h3 class="text-3xl md:text-5xl font-bold tracking-tighter text-neutral-400 group-hover:text-white transition duration-300">House of the Dragon</h3>
+                <div class="flex gap-8 text-neutral-600 font-mono text-sm mt-4 md:mt-0 uppercase tracking-wider group-hover:text-neutral-400 transition duration-300">
+                    <span>Lighting Artist / TD</span>
+                </div>
+            </div>
+            
+            <!-- Credit 3 -->
+            <div class="group flex flex-col md:flex-row justify-between items-baseline py-8 border-b border-neutral-800 hover:bg-neutral-900/40 transition duration-300 px-4 -mx-4">
+                <h3 class="text-3xl md:text-5xl font-bold tracking-tighter text-neutral-400 group-hover:text-white transition duration-300">Halo</h3>
+                <div class="flex gap-8 text-neutral-600 font-mono text-sm mt-4 md:mt-0 uppercase tracking-wider group-hover:text-neutral-400 transition duration-300">
+                    <span>Lighting Lead</span>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Stark Contact Footer -->
+    <section id="contact" class="min-h-[60vh] flex flex-col justify-center items-center relative z-10 px-6">
+        <p class="uppercase tracking-widest text-xs font-mono text-neutral-600 mb-8">// INITIATE CONTACT</p>
+        <a href="mailto:contact@burakseker.com" class="text-3xl sm:text-5xl md:text-7xl font-bold tracking-tighter text-neutral-400 hover:text-white transition-colors duration-300 mb-6">
+            contact@burakseker.com
+        </a>
+        <div class="flex space-x-8 text-xs font-mono uppercase tracking-widest text-neutral-500 mt-12">
+            <a href="https://bit.ly/4aRzTEZ" target="_blank" class="hover:text-white transition-colors">LinkedIn</a>
+            <a href="https://imdb.to/2ZEKbDa" target="_blank" class="hover:text-white transition-colors">IMDb</a>
+        </div>
+    </section>
+
+    <script>
+        // Bulletproof Smooth Scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                
+                // If it's just "#", scroll to the very top (for your name link)
+                if (targetId === '#') {
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                    return;
+                }
+                
+                // Scroll to the specific section
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
