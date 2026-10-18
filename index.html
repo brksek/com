@@ -1,233 +1,315 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Burak Seker | VFX Lighting Supervisor and Technical Director</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/lucide@latest"></script>
+    <title>Burak Seker</title>
+    <meta name="description" content="Burak Seker — Lighting Supervisor and Technical Director. Lighting tools and pipeline development in Houdini, Solaris, USD and Python.">
+    <meta property="og:title" content="Burak Seker">
+    <meta property="og:url" content="https://burakseker.com/">
+    <meta property="og:type" content="website">
+    <meta name="theme-color" content="#0a0a0a">
+    <meta name="color-scheme" content="dark">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%230a0a0a'/%3E%3Crect x='20' y='20' width='24' height='24' fill='none' stroke='%23ededed' stroke-width='3'/%3E%3C/svg%3E">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
-        /* Custom scrollbar for that premium dark mode feel */
-        ::-webkit-scrollbar {
-            width: 8px;
+        :root {
+            --bg: #0a0a0a;
+            --text: #ededed;
+            --muted: #7a7a7a;
+            --faint: #3d3d3d;
+            --line: #1c1c1c;
+            --mono: "Geist Mono", "SF Mono", ui-monospace, Menlo, monospace;
+            --gutter: clamp(16px, 4vw, 56px);
         }
-        ::-webkit-scrollbar-track {
-            background: #0a0a0a;
+        *, *::before, *::after { box-sizing: border-box; }
+        html { color-scheme: dark; background: var(--bg); -webkit-text-size-adjust: 100%; }
+        body {
+            margin: 0;
+            background: var(--bg);
+            color: var(--text);
+            font-family: var(--mono);
+            font-size: 13px;
+            line-height: 1.6;
+            letter-spacing: -0.01em;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
         }
-        ::-webkit-scrollbar-thumb {
-            background: #333;
-            border-radius: 4px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #555;
-        }
-        .video-container {
-            position: relative;
-            padding-bottom: 56.25%; /* 16:9 aspect ratio */
-            height: 0;
-            overflow: hidden;
-            border-radius: 0.5rem;
-            background-color: #171717;
-            border: 1px solid #262626;
-        }
-        .video-container iframe, .video-container video {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-        }
-        
-        /* Cinematic Grain Overlay */
-        .film-grain {
+        ::selection { background: var(--text); color: var(--bg); }
+        a { color: inherit; text-decoration: none; }
+
+        /* Faint dot grid, fading out toward the edges */
+        body::before {
+            content: "";
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
+            inset: 0;
             pointer-events: none;
-            z-index: 9999;
-            opacity: 0.04;
-            background-image: url('data:image/svg+xml,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)"/%3E%3C/svg%3E');
+            background-image: radial-gradient(rgba(255,255,255,0.07) 1px, transparent 1px);
+            background-size: 24px 24px;
+            -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 30%, #000 20%, transparent 75%);
+                    mask-image: radial-gradient(ellipse 70% 60% at 50% 30%, #000 20%, transparent 75%);
+        }
+
+        .muted { color: var(--muted); }
+        .up { text-transform: uppercase; letter-spacing: 0.08em; font-size: 11px; }
+
+        /* Top bar */
+        .bar {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 10;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px var(--gutter);
+            background: rgba(10,10,10,0.72);
+            -webkit-backdrop-filter: blur(14px) saturate(140%);
+                    backdrop-filter: blur(14px) saturate(140%);
+            border-bottom: 1px solid var(--line);
+        }
+        .bar nav { display: flex; gap: 28px; }
+        .bar a { transition: color 0.2s; }
+        @media (hover: hover) { .bar nav a:hover { color: var(--text); } }
+
+        main { position: relative; padding-left: var(--gutter); padding-right: var(--gutter); }
+
+        .id { display: flex; align-items: baseline; gap: 28px; }
+        .id .roles i { font-style: normal; color: var(--faint); padding: 0 6px; }
+        main { padding-top: clamp(64px, 9vh, 96px); }
+        main > .row:first-child { border-top: 0; }
+
+        /* Row layout: index column + content */
+        .row {
+            display: grid;
+            /* side columns match so the content column sits dead centre */
+            grid-template-columns: minmax(140px, 1fr) minmax(0, 1040px) minmax(140px, 1fr);
+            gap: 24px;
+            padding: clamp(48px, 9vh, 96px) 0;
+            border-top: 1px solid var(--line);
+        }
+        .row > .idx { display: flex; gap: 14px; }
+        .row > :nth-child(2) { min-width: 0; }
+        .row > .idx span:first-child { color: var(--faint); }
+
+        /* Reel */
+        .reel {
+            position: relative;
+            aspect-ratio: 16 / 9;
+            background: #000;
+            outline: 1px solid var(--line);
+            outline-offset: 10px;
+        }
+        .reel iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+        .reel-meta {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 22px;
+        }
+
+        /* Practice */
+        .practice {
+            margin: 0;
+            max-width: 26em;
+            font-size: clamp(1.25rem, 2.6vw, 2.1rem);
+            font-weight: 300;
+            line-height: 1.3;
+            letter-spacing: -0.035em;
+        }
+        .stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 32px;
+            padding: 0;
+            list-style: none;
+        }
+        .stack li {
+            padding: 5px 10px;
+            border: 1px solid var(--line);
+            color: var(--muted);
+        }
+
+        /* Credits */
+        .credits { list-style: none; margin: 0; padding: 0; }
+        .credits li {
+            position: relative;
+            display: grid;
+            grid-template-columns: 72px 1fr;
+            align-items: baseline;
+            gap: 24px;
+            padding: 16px 0;
+            border-bottom: 1px solid var(--line);
+        }
+        .credits li:first-child { padding-top: 0; }
+        .credits li:last-child { border-bottom: 0; }
+        .full { display: inline-block; margin-top: 28px; transition: color 0.2s; }
+        @media (hover: hover) { .full:hover { color: var(--text); } }
+        .credits .t {
+            font-size: clamp(1.05rem, 2vw, 1.5rem);
+            font-weight: 300;
+            letter-spacing: -0.03em;
+            transition: transform 0.35s cubic-bezier(.2,.7,.2,1);
+        }
+        .credits .y { color: var(--muted); font-variant-numeric: tabular-nums; }
+        .credits li::after {
+            content: "";
+            position: absolute;
+            left: 0; bottom: -1px;
+            height: 1px; width: 100%;
+            background: var(--text);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.5s cubic-bezier(.2,.7,.2,1);
+        }
+        @media (hover: hover) {
+            .credits li:hover .t { transform: translateX(10px); }
+            .credits li:hover::after { transform: scaleX(1); }
+        }
+
+        /* Contact */
+        .email {
+            display: inline-block;
+            font-size: clamp(1.25rem, 3.6vw, 2.8rem);
+            font-weight: 300;
+            letter-spacing: -0.04em;
+            position: relative;
+        }
+        .email::after {
+            content: "";
+            position: absolute;
+            left: 0; right: 0; bottom: -4px;
+            height: 1px;
+            background: var(--faint);
+            transition: background 0.3s;
+        }
+        @media (hover: hover) { .email:hover::after { background: var(--text); } }
+        .links { display: flex; gap: 28px; margin-top: 32px; }
+        .links a { transition: color 0.2s; }
+        @media (hover: hover) { .links a:hover { color: var(--text); } }
+
+        footer {
+            display: flex;
+            justify-content: space-between;
+            padding: 22px var(--gutter);
+            border-top: 1px solid var(--line);
+        }
+
+        /* Load-in */
+        .in { opacity: 0; transform: translateY(10px); animation: in 1s cubic-bezier(.2,.7,.2,1) forwards; }
+        .in.d1 { animation-delay: 0.1s; }
+        .in.d2 { animation-delay: 0.25s; }
+        .in.d3 { animation-delay: 0.4s; }
+        @keyframes in { to { opacity: 1; transform: none; } }
+
+        @media (max-width: 960px) {
+            .row { grid-template-columns: 1fr; gap: 28px; }
+        }
+        @media (max-width: 760px) {
+            .bar nav a:not(:last-child) { display: none; }
+            .id { flex-direction: column; gap: 2px; }
+            .id .roles i { display: none; }
+            .id .roles span { display: block; }
+            .bar { align-items: flex-start; }
+            .reel { outline-offset: 6px; }
+            .credits li { grid-template-columns: 1fr auto; gap: 16px; }
+            .credits .y { order: 2; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .in { opacity: 1; transform: none; animation: none; }
         }
     </style>
 </head>
-<body class="bg-black text-neutral-300 font-sans antialiased selection:bg-white selection:text-black">
+<body>
+    <header class="bar up">
+        <a href="#top" class="id"><span id="name">Burak Seker</span><span class="muted roles"><span>Lighting Supervisor</span><i>/</i><span>Technical Director</span></span></a>
+        <nav class="muted" aria-label="Sections">
+            <a href="#reel">Reel</a>
+            <a href="#credits">Credits</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
 
-    <div class="film-grain"></div>
+    <main id="top">
 
-    <!-- Minimal Nav -->
-    <nav class="fixed w-full top-0 z-50 bg-gradient-to-b from-black via-black/90 to-transparent px-6 pt-6 pb-12 md:px-12">
-        <div class="flex justify-between items-center text-xs font-mono tracking-widest uppercase text-neutral-400">
-            <a href="#" class="hover:text-white transition-colors">BURAK SEKER</a>
-            <div class="flex space-x-6">
-                <a href="#reel" class="hover:text-white transition-colors">Reel</a>
-                <a href="#about" class="hover:text-white transition-colors">About</a>
-                <a href="#credits" class="hover:text-white transition-colors">Credits</a>
-                <a href="#contact" class="hover:text-white transition-colors">Contact</a>
-            </div>
-        </div>
-    </nav>
-
-    <!-- Hero / Reel Section (No Fluff) -->
-    <section id="reel" class="min-h-screen flex flex-col justify-center px-6 md:px-12 pt-24 pb-12 relative z-10">
-        <div class="w-full flex justify-between items-end mb-6 uppercase tracking-widest text-xs font-mono text-neutral-500">
-            <span>// Lighting Supervisor</span>
-            <span>Technical Director //</span>
-        </div>
-
-        <!-- REEL CONTAINER -->
-        <div class="w-full shadow-2xl overflow-hidden relative group bg-neutral-900 border border-neutral-800">
-            <div class="video-container">
-                <iframe src="https://player.vimeo.com/video/1147817069?color=ffffff&title=0&byline=0&portrait=0" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
-            </div>
-        </div>
-    </section>
-
-    <!-- The Stack (Brutalist Spec Sheet) -->
-    <section class="px-6 md:px-12 py-12 relative z-10">
-        <div class="flex flex-col md:flex-row justify-between border-y border-neutral-800 py-12 text-xs font-mono tracking-widest text-neutral-500 uppercase gap-6 md:gap-0">
-             <div class="hover:text-white transition-colors duration-300">01 // Lighting / Lookdev</div>
-             <div class="hover:text-white transition-colors duration-300 md:text-center">02 // Houdini / Solaris</div>
-             <div class="hover:text-white transition-colors duration-300 md:text-center">03 // USD Pipeline</div>
-             <div class="hover:text-white transition-colors duration-300 md:text-right">04 // Python Tooling</div>
-        </div>
-        
-        <!-- Software Ecosystem -->
-        <div class="mt-8 flex flex-col md:flex-row justify-between gap-8 md:gap-0 text-xs font-mono tracking-widest uppercase text-neutral-600">
+        <section class="row in d1" id="reel">
+            <div class="idx up"><span>01</span><span class="muted">Reel</span></div>
             <div>
-                <span class="text-neutral-400 block mb-2">// CORE DCC</span>
-                Houdini <span class="text-neutral-800 px-2">|</span> Nuke <span class="text-neutral-800 px-2">|</span> Maya
-            </div>
-            <div class="md:text-center">
-                <span class="text-neutral-400 block mb-2">// ENGINES</span>
-                Arnold <span class="text-neutral-800 px-2">|</span> V-Ray <span class="text-neutral-800 px-2">|</span> Karma <span class="text-neutral-800 px-2">|</span> Mantra
-            </div>
-            <div class="md:text-right">
-                <span class="text-neutral-400 block mb-2">// ADAPTABILITY</span>
-                Engine Agnostic <span class="text-neutral-800 px-2">|</span> Fast Ramp-Up
-            </div>
-        </div>
-    </section>
-
-    <!-- Bio / The Operator -->
-    <section id="about" class="py-24 px-6 md:px-12 relative z-10">
-        <div class="max-w-5xl mx-auto text-center flex flex-col items-center">
-            <h2 class="uppercase tracking-widest text-xs font-mono text-neutral-500 mb-8">// INFO</h2>
-            <p class="text-2xl md:text-4xl font-semibold tracking-tight text-neutral-300 leading-snug">
-                Lighting Supervisor and Technical Director bridging the gap between lookdev and pipeline engineering.
-            </p>
-            <p class="text-lg md:text-xl text-neutral-500 mt-6 max-w-3xl mx-auto">
-                Dual focus on managing artistic direction for major sequences and building the technical architecture underneath them. Specializing in Houdini, complex USD workflows, and custom Python tooling. Writing the code to solve the bottleneck, then lighting the shot.
-            </p>
-        </div>
-    </section>
-
-    <!-- Credits List -->
-    <section id="credits" class="py-24 px-6 md:px-12 relative z-10">
-        <h2 class="uppercase tracking-widest text-xs font-mono text-neutral-500 mb-16">// Selected Works</h2>
-        
-        <div class="border-t border-neutral-800">
-
-            <!-- Credit: Avatar -->
-            <div class="group flex flex-col md:flex-row justify-between items-baseline py-8 border-b border-neutral-800 hover:bg-neutral-900/40 transition duration-300 px-4 -mx-4">
-                <h3 class="text-3xl md:text-5xl font-bold tracking-tighter text-neutral-400 group-hover:text-white transition duration-300">Avatar: The Last Airbender</h3>
-                <div class="flex gap-8 text-neutral-600 font-mono text-sm mt-4 md:mt-0 uppercase tracking-wider group-hover:text-neutral-400 transition duration-300">
-                    <span>Lighting Supervisor</span>
+                <div class="reel">
+                    <iframe src="https://player.vimeo.com/video/1147817069?color=ededed&title=0&byline=0&portrait=0" title="Reel" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
                 </div>
             </div>
-            
-            <!-- Credit 1 -->
-            <div class="group flex flex-col md:flex-row justify-between items-baseline py-8 border-b border-neutral-800 hover:bg-neutral-900/40 transition duration-300 px-4 -mx-4">
-                <h3 class="text-3xl md:text-5xl font-bold tracking-tighter text-neutral-400 group-hover:text-white transition duration-300">Final Destination: Bloodlines</h3>
-                <div class="flex gap-8 text-neutral-600 font-mono text-sm mt-4 md:mt-0 uppercase tracking-wider group-hover:text-neutral-400 transition duration-300">
-                    <span>Lighting Supervisor</span>
+        </section>
+
+        <section class="row" id="practice">
+            <div class="idx up"><span>02</span><span class="muted">Practice</span></div>
+            <div>
+                <p class="practice">Alongside supervision, I write the lighting tools and pipelines behind the work.</p>
+                <ul class="stack up">
+                    <li>Houdini</li><li>Solaris</li><li>USD</li><li>Python</li><li>Nuke</li><li>Maya</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="row" id="credits">
+            <div class="idx up"><span>03</span><span class="muted">Selected Credits</span></div>
+            <div>
+            <ul class="credits">
+                <li><span class="y up">2026</span><span class="t">Star Trek: Strange New Worlds</span></li>
+                <li><span class="y up">2026</span><span class="t">Shelter</span></li>
+                <li><span class="y up">2026</span><span class="t">The Hunger Games: Sunrise on the Reaping</span></li>
+                <li><span class="y up">2022–26</span><span class="t">House of the Dragon</span></li>
+                <li><span class="y up">2024–26</span><span class="t">Avatar: The Last Airbender</span></li>
+                <li><span class="y up">2019–26</span><span class="t">The Boys</span></li>
+                <li><span class="y up">2025</span><span class="t">Final Destination: Bloodlines</span></li>
+                <li><span class="y up">2025</span><span class="t">Alien: Earth</span></li>
+                <li><span class="y up">2022</span><span class="t">Halo</span></li>
+                <li><span class="y up">2019</span><span class="t">The Mandalorian</span></li>
+            </ul>
+            <a class="full up muted" href="https://www.imdb.com/name/nm8656228/" target="_blank" rel="noopener">Full list on IMDb ↗</a>
+            </div>
+        </section>
+
+        <section class="row" id="contact">
+            <div class="idx up"><span>04</span><span class="muted">Contact</span></div>
+            <div>
+                <a class="email" href="mailto:contact@burakseker.com">contact@burakseker.com</a>
+                <div class="links up muted">
+                    <a href="https://www.linkedin.com/in/burakseker/" target="_blank" rel="noopener">LinkedIn ↗</a>
+                    <a href="https://www.imdb.com/name/nm8656228/" target="_blank" rel="noopener">IMDb ↗</a>
                 </div>
             </div>
+        </section>
+    </main>
 
-            <!-- Credit 2 -->
-            <div class="group flex flex-col md:flex-row justify-between items-baseline py-8 border-b border-neutral-800 hover:bg-neutral-900/40 transition duration-300 px-4 -mx-4">
-                <h3 class="text-3xl md:text-5xl font-bold tracking-tighter text-neutral-400 group-hover:text-white transition duration-300">The Boys</h3>
-                <div class="flex gap-8 text-neutral-600 font-mono text-sm mt-4 md:mt-0 uppercase tracking-wider group-hover:text-neutral-400 transition duration-300">
-                    <span>Lighting Supervisor</span>
-                </div>
-            </div>
-
-            <!-- Credit: Alien -->
-            <div class="group flex flex-col md:flex-row justify-between items-baseline py-8 border-b border-neutral-800 hover:bg-neutral-900/40 transition duration-300 px-4 -mx-4">
-                <h3 class="text-3xl md:text-5xl font-bold tracking-tighter text-neutral-400 group-hover:text-white transition duration-300">Alien: Earth</h3>
-                <div class="flex gap-8 text-neutral-600 font-mono text-sm mt-4 md:mt-0 uppercase tracking-wider group-hover:text-neutral-400 transition duration-300">
-                    <span>Lighting TD</span>
-                </div>
-            </div>
-
-            <!-- Credit: Mando -->
-            <div class="group flex flex-col md:flex-row justify-between items-baseline py-8 border-b border-neutral-800 hover:bg-neutral-900/40 transition duration-300 px-4 -mx-4">
-                <h3 class="text-3xl md:text-5xl font-bold tracking-tighter text-neutral-400 group-hover:text-white transition duration-300">The Mandalorian</h3>
-                <div class="flex gap-8 text-neutral-600 font-mono text-sm mt-4 md:mt-0 uppercase tracking-wider group-hover:text-neutral-400 transition duration-300">
-                    <span>Lighting Artist</span>
-                </div>
-            </div>
-
-            <!-- Credit 4 -->
-            <div class="group flex flex-col md:flex-row justify-between items-baseline py-8 border-b border-neutral-800 hover:bg-neutral-900/40 transition duration-300 px-4 -mx-4">
-                <h3 class="text-3xl md:text-5xl font-bold tracking-tighter text-neutral-400 group-hover:text-white transition duration-300">House of the Dragon</h3>
-                <div class="flex gap-8 text-neutral-600 font-mono text-sm mt-4 md:mt-0 uppercase tracking-wider group-hover:text-neutral-400 transition duration-300">
-                    <span>Lighting Artist / TD</span>
-                </div>
-            </div>
-            
-            <!-- Credit 3 -->
-            <div class="group flex flex-col md:flex-row justify-between items-baseline py-8 border-b border-neutral-800 hover:bg-neutral-900/40 transition duration-300 px-4 -mx-4">
-                <h3 class="text-3xl md:text-5xl font-bold tracking-tighter text-neutral-400 group-hover:text-white transition duration-300">Halo</h3>
-                <div class="flex gap-8 text-neutral-600 font-mono text-sm mt-4 md:mt-0 uppercase tracking-wider group-hover:text-neutral-400 transition duration-300">
-                    <span>Lighting Lead</span>
-                </div>
-            </div>
-
-        </div>
-    </section>
-
-    <!-- Stark Contact Footer -->
-    <section id="contact" class="min-h-[60vh] flex flex-col justify-center items-center relative z-10 px-6">
-        <p class="uppercase tracking-widest text-xs font-mono text-neutral-600 mb-8">// INITIATE CONTACT</p>
-        <a href="mailto:contact@burakseker.com" class="text-3xl sm:text-5xl md:text-7xl font-bold tracking-tighter text-neutral-400 hover:text-white transition-colors duration-300 mb-6">
-            contact@burakseker.com
-        </a>
-        <div class="flex space-x-8 text-xs font-mono uppercase tracking-widest text-neutral-500 mt-12">
-            <a href="https://bit.ly/4aRzTEZ" target="_blank" class="hover:text-white transition-colors">LinkedIn</a>
-            <a href="https://imdb.to/2ZEKbDa" target="_blank" class="hover:text-white transition-colors">IMDb</a>
-        </div>
-    </section>
+    <footer class="up muted">
+        <span>© <span id="year">2026</span></span>
+        <span>burakseker.com</span>
+    </footer>
 
     <script>
-        // Bulletproof Smooth Scrolling
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                
-                // If it's just "#", scroll to the very top (for your name link)
-                if (targetId === '#') {
-                    window.scrollTo({
-                        top: 0,
-                        behavior: 'smooth'
-                    });
-                    return;
-                }
-                
-                // Scroll to the specific section
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) {
-                    targetElement.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Name resolves from scrambled glyphs on load
+        (() => {
+            if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+            const el = document.getElementById('name');
+            const target = el.textContent;
+            const glyphs = '01#/\\_-=+*<>[]{}';
+            const start = performance.now();
+            const dur = 900;
+            const tick = now => {
+                const p = Math.min((now - start) / dur, 1);
+                const done = Math.floor(p * target.length);
+                el.textContent = [...target].map((c, i) =>
+                    i < done || c === ' ' ? c : glyphs[(Math.random() * glyphs.length) | 0]
+                ).join('');
+                if (p < 1) requestAnimationFrame(tick);
+                else el.textContent = target;
+            };
+            requestAnimationFrame(tick);
+        })();
     </script>
 </body>
 </html>
-
